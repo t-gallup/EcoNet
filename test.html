@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoPowerNet.AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2196F3;
+            --background-color: rgba(232, 245, 233, 0.8);
+            --text-color: #333;
+            --error-color: #f44336;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-color);
+            background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: -1;
+        }
+
+        .container {
+            text-align: center;
+            background-color: var(--background-color);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+            
+        }
+
+        .header {
+            position: relative;
+        }
+
+        .header h1 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .login-signup {
+            margin-bottom: 2rem;
+        }
+
+        .login-signup a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            margin: 0 0.5rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .login-signup a:hover {
+            color: var(--primary-color);
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .disclaimer {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            max-width: 80%;
+            margin: 0 auto 1rem;
+        }
+
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Dark mode */
+        body.dark-mode::before {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        body.dark-mode {
+            --background-color: rgba(42, 42, 42, 0.8);
+            --text-color: #f0f0f0;
+        }
+
+        body.dark-mode .search-box {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container > * {
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .container > *:nth-child(1) { animation-delay: 0.1s; }
+        .container > *:nth-child(2) { animation-delay: 0.3s; }
+        .container > *:nth-child(3) { animation-delay: 0.5s; }
+        .container > *:nth-child(4) { animation-delay: 0.7s; }
+        .container > *:nth-child(5) { animation-delay: 0.9s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>EcoPowerNet.AI</h1>
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+        <div class="login-signup">
+            <a href="#">SIGN UP</a> / <a href="#">LOGIN</a>
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Type a climate related question to start">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        <p class="error-message">Please enter a valid question.</p>
+        <p class="disclaimer">EcoPowerNet.AI can make mistakes. Always make sure to double-check important information in its answers.</p>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        const moonIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                moonIcon.classList.remove('fa-moon');
+                moonIcon.classList.add('fa-sun');
+            } else {
+                moonIcon.classList.remove('fa-sun');
+                moonIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Search functionality
+        const searchBox = document.querySelector('.search-box');
+        const searchIcon = document.querySelector('.search-icon');
+        const errorMessage = document.querySelector('.error-message');
+
+        function validateSearch() {
+            if (searchBox.value.trim() === '') {
+                errorMessage.style.display = 'block';
+                searchBox.classList.add('error');
+            } else {
+                errorMessage.style.display = 'none';
+                searchBox.classList.remove('error');
+                // Here you would typically send the search query to your backend
+                console.log('Searching for:', searchBox.value);
+            }
+        }
+
+        searchIcon.addEventListener('click', validateSearch);
+        searchBox.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                validateSearch();
+            }
+        });
+    </script>
+</body>
+</html>
